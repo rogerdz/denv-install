@@ -7,10 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          repository: ${{ secrets.DOCKER_REPO }}
-          path: .
+        run: git clone ${{ secrets.DOCKER_REPO }} .
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
