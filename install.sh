@@ -4,7 +4,7 @@ set -e
 # check os
 os=$(uname)
 if [[ "${os,}" != "linux" && "${os,}" != "darwin" ]]; then
-	echo 'OS not support.'
+	echo 'ERROR: OS not support.'
 	exit 1
 fi
 
@@ -15,12 +15,18 @@ case $(uname -m) in
     arm64)    arch="arm64" ;;
 esac
 if [[ "$arch" == "" ]]; then
-	echo 'Architecture not support.'
+	echo 'ERROR: Architecture not support.'
 	exit 1
 fi
 
 # download tool
-curl -s -L https://github.com/rogerdz/denv-install/releases/download/0.0.1/denv-0.0.1-${os,}-${arch}.tar.gz | tar -xzvf - -C .
-chmod +x denv
-sudo mv denv /usr/local/bin
-echo 'Install success.'
+latest=$(curl --silent "https://api.github.com/repos/rogerdz/denv-install/releases/latest" | grep '"tag_name":' |  sed -E 's/.*"([^"]+)".*/\1/')
+if [[ "$arch" == "" ]]; then
+	echo "Version: $latest"
+	curl -L https://github.com/rogerdz/denv-install/releases/download/${latest}/denv-${latest}-${os,}-${arch}.tar.gz | tar -xzvf - -C .
+	chmod +x denv
+	sudo mv denv /usr/local/bin
+	echo 'Install success.'
+else
+	echo 'ERROR: File not found.'
+fi

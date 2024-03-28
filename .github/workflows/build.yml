@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        # build and publish in parallel: linux/386, linux/amd64, linux/arm64, windows/386, windows/amd64, darwin/amd64, darwin/arm64
+        # build and publish in parallel: linux/amd64, linux/arm64, darwin/amd64, darwin/arm64
         goos: [linux, darwin]
         goarch: [amd64, arm64]
     steps:
@@ -27,5 +27,4 @@ jobs:
           goversion: "1.21"
           project_path: "."
           binary_name: "denv"
-          asset_name: denv-${{ matrix.goos }}-${{ matrix.goarch }}
           overwrite: true
