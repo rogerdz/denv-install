@@ -28,3 +28,20 @@ jobs:
           CGO_ENABLED=0 GOOS=linux go build -mod=readonly -o bin/denv && \
           CGO_ENABLED=0 GOOS=darwin go build -mod=readonly -o bin/denv-darwin && \
           CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -mod=readonly -o bin/denv-arm64
+
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        # env:
+        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.event.inputs.tag }}
+          draft: false
+          prerelease: false
+
+      - name: Upload binaries to release
+        uses: alexellis/upload-assets@0.2.2
+        # env:
+        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          asset_paths: '["./bin/denv*"]'
