@@ -21,7 +21,7 @@ fi
 
 # download tool
 latest=$(curl --silent "https://api.github.com/repos/rogerdz/denv-install/releases/latest" | grep '"tag_name":' |  sed -E 's/.*"([^"]+)".*/\1/')
-if [[ "$arch" == "" ]]; then
+if [[ "$latest" != "" ]]; then
 	echo "Version: $latest"
 	curl -L https://github.com/rogerdz/denv-install/releases/download/${latest}/denv-${latest}-${os,}-${arch}.tar.gz | tar -xzvf - -C .
 	chmod +x denv
