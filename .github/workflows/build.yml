@@ -27,5 +27,5 @@ jobs:
           goversion: "1.21"
           project_path: "."
           binary_name: "denv"
-          asset_name: ${BINARY_NAME}-${GOOS}-${GOARCH}
+          asset_name: denv-${{ matrix.goos }}-${{ matrix.goarch }}
           overwrite: true
