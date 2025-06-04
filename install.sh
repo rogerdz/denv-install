@@ -2,8 +2,8 @@
 set -e
 
 # check os
-os=$(uname)
-if [[ "${os,}" != "linux" && "${os,}" != "darwin" ]]; then
+os=$(uname | tr '[:upper:]' '[:lower:]')
+if [[ "$os" != "linux" && "$os" != "darwin" ]]; then
 	echo 'ERROR: OS not support.'
 	exit 1
 fi
@@ -23,9 +23,9 @@ fi
 latest=$(curl --silent "https://api.github.com/repos/rogerdz/denv-install/releases/latest" | grep '"tag_name":' |  sed -E 's/.*"([^"]+)".*/\1/')
 if [[ "$latest" != "" ]]; then
 	echo "Version: $latest"
-	curl -L https://github.com/rogerdz/denv-install/releases/download/${latest}/denv-${latest}-${os,}-${arch}.tar.gz | tar -xzvf - -C .
-	chmod +x denv
-	sudo mv denv /usr/local/bin
+	curl -L https://github.com/rogerdz/denv-install/releases/download/$latest/denv-$latest-$os-$arch.tar.gz | tar -xzvf - -C /tmp
+	chmod +x /tmp/denv
+	sudo mv /tmp/denv /usr/local/bin
 	echo 'Install success.'
 else
 	echo 'ERROR: File not found.'
