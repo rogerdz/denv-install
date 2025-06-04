@@ -17,7 +17,10 @@ jobs:
         goarch: [amd64, arm64]
     steps:
       - name: Checkout
-        run: git clone ${{ secrets.DOCKER_REPO }} .
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ secrets.DOCKER_REPO }}
+          token: ${{ secrets.GT_TOKEN }}
 
       - uses: wangyoucao577/go-release-action@v1
         with:
