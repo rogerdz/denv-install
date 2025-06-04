@@ -19,6 +19,8 @@ jobs:
       - name: Checkout
         run: git clone ${{ secrets.DOCKER_REPO }} .
 
+      - run: ls -al
+
       - uses: wangyoucao577/go-release-action@v1
         with:
           github_token: ${{ secrets.GH_TOKEN }}

@@ -9,4 +9,6 @@ jobs:
       - name: Checkout
         run: git clone ${{ secrets.DOCKER_REPO }} .
 
+      - run: ls -al
+
 
