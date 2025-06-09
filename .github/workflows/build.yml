@@ -26,7 +26,7 @@ jobs:
           github_token: ${{ secrets.GH_TOKEN }}
           goos: ${{ matrix.goos }}
           goarch: ${{ matrix.goarch }}
-          goversion: "1.21"
+          goversion: "1.23"
           project_path: "."
           binary_name: "denv"
           overwrite: true
