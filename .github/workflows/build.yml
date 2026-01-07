@@ -29,5 +29,6 @@ jobs:
           goversion: "1.24"
           project_path: "."
           binary_name: "denv"
+          pre_command: export CGO_ENABLED=0
           ldflags: "-s -w"
           overwrite: true
