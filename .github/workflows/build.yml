@@ -30,6 +30,6 @@ jobs:
           project_path: "."
           binary_name: "denv"
           pre_command: export CGO_ENABLED=0
-          build_flags: -trimpath
+          build_flags: "-buildvcs=false -trimpath"
           ldflags: "-s -w -X 'denv/cmd.AnalyticAPI=${{ secrets.ANALYTIC_API }}'"
           overwrite: true
